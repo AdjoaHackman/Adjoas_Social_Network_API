@@ -14,15 +14,17 @@ router.route('/').get(getThoughts).post(createThought);
 
 // /api/Thoughts/:ThoughtId
 router
-  .route('/:ThoughtId')
+  .route('/:thoughtId')
   .get(getSingleThought)
   .put(updateThought)
   .delete(deleteThought);
 
 // /api/Thoughts/:ThoughtId/tags - from classwork
-router.route('/:ThoughtId/reactions').post(addReaction);
+
+router.route('/:thoughtId/reactions/:reactionId').post(addReaction);
 
 // /api/Thoughts/:ThoughtId/tags/:tagId - from classwork
-router.route('/:ThoughtId/reactions/:reactionId').delete(removeReaction);
+
+router.route('/:thoughtId/reactions/:reactionId').delete(removeReaction);
 
 module.exports = router;

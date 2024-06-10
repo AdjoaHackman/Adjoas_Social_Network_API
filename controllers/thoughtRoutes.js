@@ -1,4 +1,4 @@
-const { Thought } = require('../models/Thought');
+const { Thought } = require('../models/index');
 
 module.exports = {
   async getThoughts(req, res) {
@@ -7,6 +7,7 @@ module.exports = {
         .select('-__v');
       res.json(thoughts);
     } catch (err) {
+      console.log(err);
       res.status(500).json(err);
     }
   },
@@ -21,6 +22,7 @@ module.exports = {
 
       res.json(thoughts);
     } catch (err) {
+      console.log(err);
       res.status(500).json(err);
     }
   },
@@ -41,6 +43,46 @@ module.exports = {
       }
 
       res.json('Created the thought 🎉');
+    } catch (err) {
+      console.log(err);
+      res.status(500).json(err);
+    }
+  },
+  async updateThought(req, res) {
+    try {
+      const thoughts = await Thought.findOneAndUpdate({})
+        .select('-__v');
+      res.json(thoughts);
+    } catch (err) {
+      console.log(err);
+      res.status(500).json(err);
+    }
+  },
+  async deleteThought(req, res) {
+    try {
+      const thoughts = await Thought.deleteOne({})
+        .select('-__v');
+      res.json(thoughts);
+    } catch (err) {
+      console.log(err);
+      res.status(500).json(err);
+    }
+  },
+  async addReaction(req, res) {
+    try {
+      const reaction = await Thought.findByIdAndUpdate(req.params.thoughtId, {$push:{reactions:req.params.reactionId}})
+        .select('-__v');
+      res.json(reaction);
+    } catch (err) {
+      console.log(err);
+      res.status(500).json(err);
+    }
+  },
+  async removeReaction(req, res) {
+    try {
+      const reactions = await Thought.findByIdAndDelete(req.params.thoughtId, {$push:{reactions:req.params.reactionId}})
+        .select('-__v');
+      res.json(reactions);
     } catch (err) {
       console.log(err);
       res.status(500).json(err);
