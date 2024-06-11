@@ -1,4 +1,4 @@
-const { Thought } = require('../models/index');
+const { Thought, User } = require('../models/index');
 
 module.exports = {
   async getThoughts(req, res) {
@@ -30,8 +30,8 @@ module.exports = {
   async createThought(req, res) {
     try {
       const thought = await Thought.create(req.body);
-      const post = await User.findOneAndUpdate(
-        { _id: req.body.UserId },
+      const user = await User.findOneAndUpdate(
+        { _id: req.body.userId },
         { $addToSet: { thoughts: thought._id } },
         { new: true }
       );
