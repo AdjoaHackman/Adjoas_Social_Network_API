@@ -71,7 +71,7 @@ module.exports = {
   },
   async addReaction(req, res) {
     try {
-      const reaction = await Thought.findByIdAndUpdate(ObjectId(req.params.thoughtId), {$push:{reactions:req.body}})
+      const reaction = await Thought.findByIdAndUpdate(req.params.thoughtId, {$push:{reactions:req.body}},{new:true})
         .select('-__v');
       res.json(reaction);
     } catch (err) {
@@ -81,7 +81,7 @@ module.exports = {
   },
   async removeReaction(req, res) {
     try {
-      const reactions = await Thought.findByIdAndDelete(ObjectId(req.params.thoughtId), {$push:{reactions:req.body}})
+      const reactions = await Thought.findByIdAndDelete(req.params.thoughtId, {$push:{reactions:req.body}})
         .select('-__v');
       res.json(reactions);
     } catch (err) {
