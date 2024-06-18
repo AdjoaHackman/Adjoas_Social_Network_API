@@ -21,10 +21,10 @@ router
 
 // /api/Thoughts/:ThoughtId/tags - from classwork
 
-router.route('/:thoughtId/reactions/:reactionId').post(addReaction);
+router.route('/:thoughtId/reactions').post(addReaction);
 
 // /api/Thoughts/:ThoughtId/tags/:tagId - from classwork
 
-router.route('/:thoughtId/reactions/:reactionId').delete(removeReaction);
+router.route('/:thoughtId/reactions').delete(removeReaction);
 
 module.exports = router;

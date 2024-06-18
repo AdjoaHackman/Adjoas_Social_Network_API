@@ -1,4 +1,5 @@
 const { Thought, User } = require('../models/index');
+const { ObjectId } = require("mongoose");
 
 module.exports = {
   async getThoughts(req, res) {
@@ -70,7 +71,7 @@ module.exports = {
   },
   async addReaction(req, res) {
     try {
-      const reaction = await Thought.findByIdAndUpdate(req.params.thoughtId, {$push:{reactions:req.params.reactionId}})
+      const reaction = await Thought.findByIdAndUpdate(ObjectId(req.params.thoughtId), {$push:{reactions:req.body}})
         .select('-__v');
       res.json(reaction);
     } catch (err) {
@@ -80,7 +81,7 @@ module.exports = {
   },
   async removeReaction(req, res) {
     try {
-      const reactions = await Thought.findByIdAndDelete(req.params.thoughtId, {$push:{reactions:req.params.reactionId}})
+      const reactions = await Thought.findByIdAndDelete(ObjectId(req.params.thoughtId), {$push:{reactions:req.body}})
         .select('-__v');
       res.json(reactions);
     } catch (err) {

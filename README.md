@@ -3,6 +3,8 @@
 # Description
 This assignment required me to create an API for a social network application where users can post thoughts, post a reaction to a friends thought, and create a friends list. 
 
+# Live Screen Recording
+[Screen Recording]()
 
 # Table of Contents
 - [Installation](#installation)
